@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudentHub - Task Manager</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#fffaf0;
+    color:#302615;
+}
+
+header{
+    height:75px;
+    padding:0 7%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:white;
+
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.logo span{
+    color:#ff9f43;
+}
+
+.back{
+    padding:11px 20px;
+
+    border:none;
+    border-radius:25px;
+
+    background:#ff9f43;
+    color:white;
+
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.container{
+    max-width:900px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.title h1{
+    font-size:42px;
+}
+
+.title p{
+    color:#777;
+    margin-top:10px;
+}
+
+.box{
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+input{
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    margin-bottom:15px;
+
+    font-size:15px;
+}
+
+.add{
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#ff9f43;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.task{
+    margin-top:15px;
+
+    padding:18px;
+
+    background:#fff5df;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.complete{
+    text-decoration:line-through;
+    opacity:.5;
+}
+
+.actions button{
+    border:none;
+
+    padding:8px 10px;
+
+    border-radius:7px;
+
+    margin-left:5px;
+
+    cursor:pointer;
+}
+
+.done{
+    background:#00b894;
+    color:white;
+}
+
+.delete{
+    background:#ff5c7a;
+    color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo" onclick="goHome()">
+        🎓 Student<span>Hub</span>
+    </div>
+
+    <button class="back" onclick="goHome()">
+        ← Home
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <div class="title">
+
+        <h1>✅ Task Manager</h1>
+
+        <p>
+            Manage your assignments and daily tasks.
+        </p>
+
+    </div>
+
+
+    <div class="box">
+
+        <input
+            type="text"
+            id="task"
+            placeholder="Enter your task">
+
+        <button
+            class="add"
+            onclick="addTask()">
+
+            + Add Task
+
+        </button>
+
+        <div id="taskList"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function goHome(){
+    window.location.href="index.html";
+}
+
+function addTask(){
+
+    let task=document.getElementById("task").value;
+
+    if(task===""){
+        alert("Please enter a task.");
+        return;
+    }
+
+    let item=document.createElement("div");
+
+    item.className="task";
+
+    item.innerHTML=`
+
+        <span>${task}</span>
+
+        <div class="actions">
+
+            <button
+                class="done"
+                onclick="completeTask(this)">
+
+                ✓
+
+            </button>
+
+            <button
+                class="delete"
+                onclick="this.parentElement.parentElement.remove()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+    `;
+
+    document.getElementById("taskList").appendChild(item);
+
+    document.getElementById("task").value="";
+
+}
+
+function completeTask(button){
+
+    let task=button.parentElement.parentElement;
+
+    task.querySelector("span").classList.toggle("complete");
+
+}
+
+</script>
+
+</body>
+</html>

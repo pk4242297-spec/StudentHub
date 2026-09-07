@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudentHub - CGPA Calculator</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#fff5fa;
+    color:#291622;
+}
+
+header{
+    height:75px;
+
+    padding:0 7%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:white;
+
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.logo span{
+    color:#e044a6;
+}
+
+.back{
+    padding:11px 20px;
+
+    border:none;
+
+    border-radius:25px;
+
+    background:#e044a6;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.container{
+    max-width:700px;
+
+    margin:50px auto;
+
+    padding:20px;
+}
+
+.title{
+    text-align:center;
+
+    margin-bottom:30px;
+}
+
+.title h1{
+    font-size:42px;
+}
+
+.title p{
+    color:#777;
+
+    margin-top:10px;
+}
+
+.box{
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.row{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+    margin-bottom:15px;
+}
+
+input{
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:15px;
+}
+
+button{
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#e044a6;
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.result{
+    margin-top:25px;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    background:#ffeaf3;
+
+    text-align:center;
+}
+
+.result h2{
+    font-size:32px;
+
+    color:#d32d8e;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo" onclick="goHome()">
+        🎓 Student<span>Hub</span>
+    </div>
+
+    <button
+        class="back"
+        onclick="goHome()">
+
+        ← Home
+
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <div class="title">
+
+        <h1>🎯 CGPA Calculator</h1>
+
+        <p>
+            Enter your semester details and calculate your CGPA.
+        </p>
+
+    </div>
+
+
+    <div class="box">
+
+        <div class="row">
+
+            <input
+                type="number"
+                id="sem1"
+                step="0.01"
+                min="0"
+                max="10"
+                placeholder="Semester 1 CGPA">
+
+            <input
+                type="number"
+                id="sem2"
+                step="0.01"
+                min="0"
+                max="10"
+                placeholder="Semester 2 CGPA">
+
+        </div>
+
+
+        <div class="row">
+
+            <input
+                type="number"
+                id="sem3"
+                step="0.01"
+                min="0"
+                max="10"
+                placeholder="Semester 3 CGPA">
+
+            <input
+                type="number"
+                id="sem4"
+                step="0.01"
+                min="0"
+                max="10"
+                placeholder="Semester 4 CGPA">
+
+        </div>
+
+
+        <button onclick="calculateCGPA()">
+            Calculate CGPA
+        </button>
+
+
+        <div
+            class="result"
+            id="result">
+
+            <p>
+                Enter your semester CGPA values.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function goHome(){
+
+    window.location.href="index.html";
+
+}
+
+function calculateCGPA(){
+
+    let values=[];
+
+    for(let i=1;i<=4;i++){
+
+        let value=parseFloat(
+            document.getElementById("sem"+i).value
+        );
+
+        if(!isNaN(value)){
+            values.push(value);
+        }
+
+    }
+
+    if(values.length===0){
+
+        alert("Please enter at least one CGPA.");
+
+        return;
+
+    }
+
+    let total=0;
+
+    values.forEach(function(value){
+
+        total += value;
+
+    });
+
+    let cgpa=total/values.length;
+
+    document.getElementById("result").innerHTML=`
+
+        <p>Your Average CGPA</p>
+
+        <h2>${cgpa.toFixed(2)}</h2>
+
+        <p style="margin-top:8px;">
+            Based on ${values.length} semester(s)
+        </p>
+
+    `;
+
+}
+
+</script>
+
+</body>
+</html>

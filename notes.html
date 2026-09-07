@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>StudentHub - Smart Notes</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5fff9;
+    color:#172b23;
+}
+
+header{
+    height:75px;
+    padding:0 7%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:white;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+.logo span{
+    color:#00a878;
+}
+
+.back{
+    padding:11px 20px;
+    border:none;
+    border-radius:25px;
+
+    background:#00a878;
+    color:white;
+
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.container{
+    max-width:900px;
+    margin:50px auto;
+    padding:20px;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.title h1{
+    font-size:42px;
+}
+
+.title p{
+    color:#777;
+    margin-top:10px;
+}
+
+.notes-box{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+input,textarea{
+    width:100%;
+    padding:14px;
+    margin-bottom:15px;
+
+    border:1px solid #ddd;
+    border-radius:10px;
+
+    font-size:15px;
+}
+
+textarea{
+    min-height:180px;
+    resize:vertical;
+}
+
+.save{
+    width:100%;
+    padding:14px;
+
+    border:none;
+    border-radius:10px;
+
+    background:#00a878;
+    color:white;
+
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.note{
+    margin-top:20px;
+    padding:20px;
+
+    background:#e8fff5;
+
+    border-radius:12px;
+}
+
+.delete{
+    margin-top:12px;
+
+    padding:8px 14px;
+
+    border:none;
+    border-radius:8px;
+
+    background:#ff5c7a;
+    color:white;
+
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo" onclick="goHome()">
+        🎓 Student<span>Hub</span>
+    </div>
+
+    <button class="back" onclick="goHome()">
+        ← Home
+    </button>
+
+</header>
+
+
+<div class="container">
+
+    <div class="title">
+
+        <h1>📝 Smart Notes</h1>
+
+        <p>
+            Write and save your important study notes.
+        </p>
+
+    </div>
+
+
+    <div class="notes-box">
+
+        <input
+            type="text"
+            id="noteTitle"
+            placeholder="Note title">
+
+        <textarea
+            id="noteText"
+            placeholder="Write your notes here..."></textarea>
+
+        <button
+            class="save"
+            onclick="saveNote()">
+
+            💾 Save Note
+
+        </button>
+
+        <div id="notes"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function goHome(){
+    window.location.href="index.html";
+}
+
+function saveNote(){
+
+    let title=document.getElementById("noteTitle").value;
+    let text=document.getElementById("noteText").value;
+
+    if(title==="" || text===""){
+        alert("Please enter title and notes.");
+        return;
+    }
+
+    let note=document.createElement("div");
+
+    note.className="note";
+
+    note.innerHTML=`
+
+        <h3>${title}</h3>
+
+        <p style="margin-top:10px;line-height:1.6;">
+            ${text}
+        </p>
+
+        <button
+            class="delete"
+            onclick="this.parentElement.remove()">
+
+            Delete
+
+        </button>
+
+    `;
+
+    document.getElementById("notes").appendChild(note);
+
+    document.getElementById("noteTitle").value="";
+    document.getElementById("noteText").value="";
+
+}
+
+</script>
+
+</body>
+</html>
