@@ -72,10 +72,5 @@ python -m http.server 8000
 
 Contributions, issues and feature requests are welcome. Fork the repo, create a branch, and open a pull request.
 
-## 📄 License
-
-Add a license of your choice (for example, [MIT](https://choosealicense.com/licenses/mit/)).
-
----
 
 Built for students ❤️
